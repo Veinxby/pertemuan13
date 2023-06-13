@@ -7,6 +7,25 @@
     $harga = htmlspecialchars($_POST['harga']);
     $stok = htmlspecialchars($_POST['stok']);
 
+    $namaFile = $_FILES['gambar']['name'];
+    $ukuranFile = $_FILES['gambar']['size']; 
+    $extAllow = ['jpg', 'jpeg', 'png', 'gif'];
+    $validExt = (explode(".", $namaFile));
+    $extValid = strtolower(end($validExt));
+    $tmpName = $_FILES['gambar']['tmp_name'];
+
+    // cek kondisi ukuran file 
+    if ($ukuranFile <= 2000000){
+        if (in_array($extValid, $extAllow)){
+            echo 'extension ada';
+        }
+    }else{
+        echo "Salah";
+    }
+    die();
+
+
+
     $sql = "SELECT * FROM barang WHERE kode_barang='$kode'";
     $query = mysqli_query($koneksi, $sql);
     $baris = mysqli_fetch_array($query);
